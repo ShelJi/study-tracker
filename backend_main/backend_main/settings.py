@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,3 +112,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# installed apps -> jazzmin_dash
+# JAZZMIN_DASHBOARD = {
+#     "widgets": [
+#         {
+#             "type": "chart",
+#             "data_source": "tracker.views.get_study_chart_data",  # Your view
+#             "title": "Study Hours Over Time",
+#             "style": "primary"
+#         },
+#         {
+#             "type": "card",
+#             "title": "Total Users",
+#             "value": 120,
+#             "style": "success"
+#         }
+#     ]
+# }

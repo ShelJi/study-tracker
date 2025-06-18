@@ -1,3 +1,7 @@
 from django.contrib import admin
+from tracker.models import (StudyRecordModel,
+                            SubjectRecordModel)
 
-# Register your models here.
+
+admin.site.register(StudyRecordModel)
+admin.site.register(SubjectRecordModel)
