@@ -36,8 +36,9 @@ class StudentModel(models.Model):
     """
     Model to store student details.
     """
-    user_name = models.CharField(max_length=100, verbose_name="Student Name", null=True, blank=True)
     staff = models.ForeignKey(StaffModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Staff")
+    user_name = models.CharField(max_length=100, verbose_name="Student Name", null=True, blank=True)
+    passCode = models.CharField(max_length=20, verbose_name="Pass Code", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
 
@@ -109,5 +110,3 @@ class SubjectRecordModel(models.Model):
 
     def __str__(self):
         return f"{self.subject} - {self.user_sub.student_name} - {self.created_at.strftime('%Y-%m-%d')}"
-    
-    
