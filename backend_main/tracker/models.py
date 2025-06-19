@@ -15,11 +15,46 @@ SUBJECT_CHOICES = [
 ]
 
 
+class StaffModel(models.Model):
+    """
+    Model to store staff details.
+    """
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
+
+    class Meta:
+        verbose_name = "Staff"
+        verbose_name_plural = "Staffs"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user_name}"
+    
+
+class StudentModel(models.Model):
+    """
+    Model to store student details.
+    """
+    user_name = models.CharField(max_length=100, verbose_name="Student Name", null=True, blank=True)
+    staff = models.ForeignKey(StaffModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Staff")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
+
+    class Meta:
+        verbose_name = "Student"
+        verbose_name_plural = "Students"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user_name}"
+
+
 class StudyRecordModel(models.Model):
     """
     Model to store records of daily study datas.
     """
-    user_name = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
+    user_name = models.ForeignKey(StaffModel, on_delete=models.CASCADE, verbose_name="User", null=True, blank=True)
     student_name = models.CharField(max_length=100, verbose_name="Student Name", null=True, blank=True)
     date = models.DateField(verbose_name="Date")
     time_in = models.TimeField(verbose_name="Time In")
@@ -35,7 +70,7 @@ class StudyRecordModel(models.Model):
         ordering = ['-date', '-created_at']
 
     def __str__(self):
-        return f"{self.user_name} - {self.date}"
+        return f"{self.student_name} - {self.date}"
     
     def save(self, *args, **kwargs):
         
@@ -73,4 +108,6 @@ class SubjectRecordModel(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.subject}"
+        return f"{self.subject} - {self.user_sub.student_name} - {self.created_at.strftime('%Y-%m-%d')}"
+    
+    
