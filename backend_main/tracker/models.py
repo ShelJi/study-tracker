@@ -54,8 +54,8 @@ class StudyRecordModel(models.Model):
     """
     Model to store records of daily study datas.
     """
-    user_name = models.ForeignKey(StaffModel, on_delete=models.CASCADE, verbose_name="User", null=True, blank=True)
-    student_name = models.CharField(max_length=100, verbose_name="Student Name", null=True, blank=True)
+    user_name = models.ForeignKey(StaffModel, on_delete=models.CASCADE, verbose_name="Staff Name", null=True, blank=True)
+    student_name = models.ForeignKey(StudentModel, verbose_name="Student", on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(verbose_name="Date")
     time_in = models.TimeField(verbose_name="Time In")
     time_out = models.TimeField(verbose_name="Time Out")
